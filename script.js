@@ -10,31 +10,29 @@ function genBtn() {
 
     boxButtons.innerHTML = ""; //empty the box before creating new buttons
 
-    /*We create the buttons, add a "Castigator" event and
-    add a "Pierzator" event to the losing buttons, then we add them to the button box.*/
+    /*We create the buttons and add them to the button box.*/
 
     for (let index = 1; index <= numBtn; ++index) {
         let newBtn = document.createElement("button");
-        newBtn.type = "button";
-        newBtn.class = `button.btn${index}`;
         newBtn.textContent = `Button${index}`;
-        if (winningButton == index) {
-            newBtn.addEventListener('click', buttonSelection.winner);
+
+        if (winningButton === index) {
+            newBtn.setAttribute("name", "winner");
+            
         } else {
-            newBtn.addEventListener('click', buttonSelection.loser);
+            newBtn.setAttribute("name", "loser");
         }
+
+        newBtn.addEventListener("click", buttonSelection);
         boxButtons.appendChild(newBtn);
     }
 }
 
-
-
-const buttonSelection = {
-    winner() {
-        alert('Castigator');
-    },
-
-    loser() {
-        alert('Pierzator');
-    },
-};
+function buttonSelection() { //We return the winner or loser depending on the button called.
+    const buttonName = this.name;
+    
+    if (buttonName === "winner") {
+        return alert('Castigator');
+    }
+    return alert('Pierzator');
+}
