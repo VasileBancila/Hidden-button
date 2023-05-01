@@ -1,3 +1,11 @@
+function buttonSelection(status) { //We return the winner or loser depending on the button called.
+    if (status === "winner") {
+        alert('Castigator');
+    } else {
+        alert('Pierzator');
+    }
+}
+
 function genBtn() {
     let numBtn = parseInt(document.getElementById("numButtons").value); //we convert the input from string to int 
     let boxButtons = document.getElementById("boxBtn");
@@ -17,22 +25,15 @@ function genBtn() {
         newBtn.textContent = `Button${index}`;
 
         if (winningButton === index) {
-            newBtn.setAttribute("name", "winner");
-            
+            newBtn.addEventListener("click", function() {
+                buttonSelection("winner");
+            });                      
         } else {
-            newBtn.setAttribute("name", "loser");
+            newBtn.addEventListener("click", function() {
+                buttonSelection("loser");
+            });
         }
-
-        newBtn.addEventListener("click", buttonSelection);
+        
         boxButtons.appendChild(newBtn);
     }
-}
-
-function buttonSelection() { //We return the winner or loser depending on the button called.
-    const buttonName = this.name;
-    
-    if (buttonName === "winner") {
-        return alert('Castigator');
-    }
-    return alert('Pierzator');
 }
